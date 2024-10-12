@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import Menu from "./Menu";
+import Menu from "./navbar-component/Menu";
 import Image from "next/image";
-import SearchBar from "./SearchBar";
+import NavIcons from "./navbar-component/NavIcons";
+import SearchBar from "./navbar-component/SearchBar";
 
 const Navbar = () => {
   return (
@@ -26,6 +27,7 @@ const Navbar = () => {
         {/* right */}
         <div className="w-2/3 flex items-center justify-between gap-8">
           <SearchBar />
+          <NavIcons />
         </div>
       </div>
     </div>
