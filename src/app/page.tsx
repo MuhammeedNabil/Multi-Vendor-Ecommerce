@@ -1,4 +1,4 @@
-import { ProductList } from "@/components/homePage-components/ProductList";
+import ProductList from "@/components/homePage-components/ProductList";
 import Slider from "@/components/homePage-components/Slider";
 
 const HomePage = () => {

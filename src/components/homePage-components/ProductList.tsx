@@ -1,9 +1,8 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export const ProductList = () => {
+const ProductList = () => {
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-center flex-wrap">
       <Link
@@ -148,3 +147,5 @@ export const ProductList = () => {
     </div>
   );
 };
+
+export default ProductList;
