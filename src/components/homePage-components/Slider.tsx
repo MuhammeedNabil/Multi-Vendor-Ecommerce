@@ -91,7 +91,7 @@ const Slider = () => {
             onClick={() => setCurrent(index)}
           >
             {current === index && (
-              <div className="w-[7px] h-[7px] bg-gray-600 rounded-full"></div>
+              <div className="w-[6px] h-[6px] bg-gray-600 rounded-full"></div>
             )}
           </div>
         ))}
