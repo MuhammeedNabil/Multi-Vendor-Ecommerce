@@ -1,46 +1,104 @@
-import Link from "next/link";
-import Menu from "./Menu";
 import Image from "next/image";
-import SearchBar from "./SearchBar";
-import dynamic from "next/dynamic";
-// import NavIcons from "./NavIcons";
+import Link from "next/link";
 
-const NavIcons = dynamic(() => import("./NavIcons"), { ssr: false });
-
-const Navbar = () => {
+const Footer = () => {
   return (
-    <div className="h-20 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
-      {/* MOBILE */}
-      <div className="h-full flex items-center justify-between md:hidden">
-        <Link href="/">
-          <div className="text-2xl tracking-wide">Pink</div>
-        </Link>
-        <Menu />
-      </div>
-      {/* BIGGER SCREENS */}
-      <div className="hidden md:flex items-center justify-between gap-8 h-full">
+    <div className="py-24 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 bg-gray-100 text-sm mt-24">
+      {/* TOP */}
+      <div className="flex flex-col md:flex-row justify-between gap-24">
         {/* LEFT */}
-        <div className="w-1/3 xl:w-1/2 flex items-center gap-12">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.png" alt="" width={24} height={24} />
+        <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
+          <Link href="/">
             <div className="text-2xl tracking-wide">Pink</div>
           </Link>
-          <div className="hidden xl:flex gap-4">
-            <Link href="/">Homepage</Link>
-            <Link href="/">Shop</Link>
-            <Link href="/">Deals</Link>
-            <Link href="/">About</Link>
-            <Link href="/">Contact</Link>
+          <p>
+            3252 Winding Way, Central Plaza, Willowbrook, CA 90210, United
+            States
+          </p>
+          <span className="font-semibold">hello@Pink.dev</span>
+          <span className="font-semibold">+1 234 567 890</span>
+          <div className="flex gap-6">
+            <Image src="/facebook.png" alt="" width={16} height={16} />
+            <Image src="/instagram.png" alt="" width={16} height={16} />
+            <Image src="/youtube.png" alt="" width={16} height={16} />
+            <Image src="/pinterest.png" alt="" width={16} height={16} />
+            <Image src="/x.png" alt="" width={16} height={16} />
+          </div>
+        </div>
+        {/* CENTER */}
+        <div className="hidden lg:flex justify-between w-1/2">
+          <div className="flex flex-col justify-between">
+            <h1 className="font-medium text-lg">COMPANY</h1>
+            <div className="flex flex-col gap-6">
+              <Link href="">About Us</Link>
+              <Link href="">Careers</Link>
+              <Link href="">Affiliates</Link>
+              <Link href="">Blog</Link>
+              <Link href="">Contact Us</Link>
+            </div>
+          </div>
+          <div className="flex flex-col justify-between">
+            <h1 className="font-medium text-lg">SHOP</h1>
+            <div className="flex flex-col gap-6">
+              <Link href="">New Arrivals</Link>
+              <Link href="">Accessories</Link>
+              <Link href="">Men</Link>
+              <Link href="">Women</Link>
+              <Link href="">All Products</Link>
+            </div>
+          </div>
+          <div className="flex flex-col justify-between">
+            <h1 className="font-medium text-lg">HELP</h1>
+            <div className="flex flex-col gap-6">
+              <Link href="">Customer Service</Link>
+              <Link href="">My Account</Link>
+              <Link href="">Find a Store</Link>
+              <Link href="">Legal & Privacy</Link>
+              <Link href="">Gift Card</Link>
+            </div>
           </div>
         </div>
         {/* RIGHT */}
-        <div className="w-2/3 xl:w-1/2 flex items-center justify-between gap-8">
-          <SearchBar />
-          <NavIcons />
+        <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
+          <h1 className="font-medium text-lg">SUBSCRIBE</h1>
+          <p>
+            Be the first to get the latest news about trends, promotions, and
+            much more!
+          </p>
+          <div className="flex">
+            <input
+              type="text"
+              placeholder="Email address"
+              className="p-4 w-3/4"
+            />
+            <button className="w-1/4 bg-Pink text-white">JOIN</button>
+          </div>
+          <span className="font-semibold">Secure Payments</span>
+          <div className="flex justify-between">
+            <Image src="/discover.png" alt="" width={40} height={20} />
+            <Image src="/skrill.png" alt="" width={40} height={20} />
+            <Image src="/paypal.png" alt="" width={40} height={20} />
+            <Image src="/mastercard.png" alt="" width={40} height={20} />
+            <Image src="/visa.png" alt="" width={40} height={20} />
+          </div>
+        </div>
+      </div>
+      {/* BOTTOM */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-8 mt-16">
+        <div className="">© 2024 Pink Shop</div>
+        <div className="flex flex-col gap-8 md:flex-row">
+          <div className="">
+            <span className="text-gray-500 mr-4">Language</span>
+            <span className="font-medium">United States | English</span>
+          </div>
+          <div className="">
+            <span className="text-gray-500 mr-4">Currency</span>
+            <span className="font-medium">$ USD</span>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default Footer;

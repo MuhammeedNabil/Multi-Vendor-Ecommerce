@@ -1,110 +1,102 @@
-import { wixClientServer } from "@/lib/wixClientServer";
-import { products } from "@wix/stores";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import DOMPurify from "isomorphic-dompurify";
-import Pagination from "./Pagination";
+import { useEffect, useState } from "react";
 
-const PRODUCT_PER_PAGE = 8;
+const slides = [
+  {
+    id: 1,
+    title: "Summer Sale Collections",
+    description: "Sale! Up to 50% off!",
+    img: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+    url: "/",
+    bg: "bg-gradient-to-r from-yellow-50 to-pink-50",
+  },
+  {
+    id: 2,
+    title: "Winter Sale Collections",
+    description: "Sale! Up to 50% off!",
+    img: "https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=800",
+    url: "/",
+    bg: "bg-gradient-to-r from-pink-50 to-blue-50",
+  },
+  {
+    id: 3,
+    title: "Spring Sale Collections",
+    description: "Sale! Up to 50% off!",
+    img: "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
+    url: "/",
+    bg: "bg-gradient-to-r from-blue-50 to-yellow-50",
+  },
+];
 
-const ProductList = async ({
-  categoryId,
-  limit,
-  searchParams,
-}: {
-  categoryId?: string;
-  limit?: number;
-  searchParams?: any;
-}) => {
-  const wixClient = await wixClientServer();
+const Slider = () => {
+  const [current, setCurrent] = useState(0);
 
-  const productQuery = wixClient.products
-    .queryProducts()
-    .startsWith("name", searchParams?.name || "")
-    .eq("collectionIds", categoryId)
-    .hasSome(
-      "productType",
-      searchParams?.type ? [searchParams.type] : ["physical", "digital"]
-    )
-    .gt("priceData.price", searchParams?.min || 0)
-    .lt("priceData.price", searchParams?.max || 999999)
-    .limit(limit || PRODUCT_PER_PAGE)
-    .skip(
-      searchParams?.page
-        ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
-        : 0
-    );
-  // .find();
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  //   }, 3000);
 
-  if (searchParams?.sort) {
-    const [sortType, sortBy] = searchParams.sort.split(" ");
-
-    if (sortType === "asc") {
-      productQuery.ascending(sortBy);
-    }
-    if (sortType === "desc") {
-      productQuery.descending(sortBy);
-    }
-  }
-
-  const res = await productQuery.find();
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
-    <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
-      {res.items.map((product: products.Product) => (
-        <Link
-          href={"/" + product.slug}
-          className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-          key={product._id}
-        >
-          <div className="relative w-full h-80">
-            <Image
-              src={product.media?.mainMedia?.image?.url || "/product.png"}
-              alt=""
-              fill
-              sizes="25vw"
-              className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-            />
-            {product.media?.items && (
+    <div className="h-[calc(100vh-80px)] overflow-hidden">
+      <div
+        className="w-max h-full flex transition-all ease-in-out duration-1000"
+        style={{ transform: `translateX(-${current * 100}vw)` }}
+      >
+        {slides.map((slide) => (
+          <div
+            className={`${slide.bg} w-screen h-full flex flex-col gap-16 xl:flex-row`}
+            key={slide.id}
+          >
+            {/* TEXT CONTAINER */}
+            <div className="h-1/2 xl:w-1/2 xl:h-full flex flex-col items-center justify-center gap-8 2xl:gap-12 text-center">
+              <h2 className="text-xl lg:text-3xl 2xl:text-5xl">
+                {slide.description}
+              </h2>
+              <h1 className="text-5xl lg:text-6xl 2xl:text-8xl font-semibold">
+                {slide.title}
+              </h1>
+              <Link href={slide.url}>
+                <button className="rounded-md bg-black text-white py-3 px-4 ">
+                  SHOP NOW
+                </button>
+              </Link>
+            </div>
+            {/* IMAGE CONTAINER */}
+            <div className="h-1/2 xl:w-1/2 xl:h-full relative">
               <Image
-                src={product.media?.items[1]?.image?.url || "/product.png"}
+                src={slide.img}
                 alt=""
                 fill
-                sizes="25vw"
-                className="absolute object-cover rounded-md"
+                sizes="100%"
+                className="object-cover"
               />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="absolute m-auto left-1/2 bottom-8 flex gap-4">
+        {slides.map((slide, index) => (
+          <div
+            className={`w-3 h-3  rounded-full ring-1 ring-gray-600 cursor-pointer flex items-center justify-center ${
+              current === index ? "scale-150" : ""
+            }`}
+            key={slide.id}
+            onClick={() => setCurrent(index)}
+          >
+            {current === index && (
+              <div className="w-[6px] h-[6px] bg-gray-600 rounded-full"></div>
             )}
           </div>
-          <div className="flex justify-between">
-            <span className="font-medium">{product.name}</span>
-            <span className="font-semibold">${product.price?.price}</span>
-          </div>
-          {product.additionalInfoSections && (
-            <div
-              className="text-sm text-gray-500"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(
-                  product.additionalInfoSections.find(
-                    (section: any) => section.title === "shortDesc"
-                  )?.description || ""
-                ),
-              }}
-            ></div>
-          )}
-          <button className="rounded-2xl ring-1 ring-Pink text-Pink w-max py-2 px-4 text-xs hover:bg-Pink hover:text-white">
-            Add to Cart
-          </button>
-        </Link>
-      ))}
-      {searchParams?.cat || searchParams?.name ? (
-        <Pagination
-          currentPage={res.currentPage || 0}
-          hasPrev={res.hasPrev()}
-          hasNext={res.hasNext()}
-        />
-      ) : null}
+        ))}
+      </div>
     </div>
   );
 };
 
-export default ProductList;
+export default Slider;

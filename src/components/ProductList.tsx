@@ -17,11 +17,12 @@ const ProductList = async ({
   searchParams?: any;
 }) => {
   const wixClient = await wixClientServer();
+console.log('categoryIdcategoryId',categoryId);
 
   const productQuery = wixClient.products
     .queryProducts()
     .startsWith("name", searchParams?.name || "")
-    .eq("collectionIds", categoryId)
+    .eq("collectionIds", categoryId || "00000000-000000-000000-000000000001")
     .hasSome(
       "productType",
       searchParams?.type ? [searchParams.type] : ["physical", "digital"]
