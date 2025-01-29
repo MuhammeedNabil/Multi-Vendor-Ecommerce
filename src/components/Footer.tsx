@@ -9,20 +9,19 @@ const Footer = () => {
         {/* LEFT */}
         <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
           <Link href="/">
-            <div className="text-2xl tracking-wide">Pink</div>
+            <div className="text-2xl tracking-wide">Bahja Wear</div>
           </Link>
           <p>
-            3252 Winding Way, Central Plaza, Willowbrook, CA 90210, United
-            States
+            Egypt, Cairo | Online Store
           </p>
-          <span className="font-semibold">hello@Pink.dev</span>
-          <span className="font-semibold">+1 234 567 890</span>
-          <div className="flex gap-6">
+          <span className="font-semibold">hello@Bahja.dev</span>
+          <span className="font-semibold">+20 127 000 6196</span>
+          <div className="flex gap-3">
             <Image src="/facebook.png" alt="" width={16} height={16} />
             <Image src="/instagram.png" alt="" width={16} height={16} />
-            <Image src="/youtube.png" alt="" width={16} height={16} />
+            {/* <Image src="/youtube.png" alt="" width={16} height={16} />
             <Image src="/pinterest.png" alt="" width={16} height={16} />
-            <Image src="/x.png" alt="" width={16} height={16} />
+            <Image src="/x.png" alt="" width={16} height={16} /> */}
           </div>
         </div>
         {/* CENTER */}
@@ -74,26 +73,28 @@ const Footer = () => {
             <button className="w-1/4 bg-Pink text-white">JOIN</button>
           </div>
           <span className="font-semibold">Secure Payments</span>
-          <div className="flex justify-between">
-            <Image src="/discover.png" alt="" width={40} height={20} />
+          <div className="flex gap-3">
+          <Image src="/InstaPay.png" alt="" width={40} height={20}/>
+          <Image src="/CashOnDelivery.png" alt="" width={40} height={20} />
+            {/* <Image src="/discover.png" alt="" width={40} height={20} />
             <Image src="/skrill.png" alt="" width={40} height={20} />
             <Image src="/paypal.png" alt="" width={40} height={20} />
             <Image src="/mastercard.png" alt="" width={40} height={20} />
-            <Image src="/visa.png" alt="" width={40} height={20} />
+            <Image src="/visa.png" alt="" width={40} height={20} /> */} 
           </div>
         </div>
       </div>
       {/* BOTTOM */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-8 mt-16">
-        <div className="">© 2024 Pink Shop</div>
+        <div className="">© 2024 Bahja Wear</div>
         <div className="flex flex-col gap-8 md:flex-row">
           <div className="">
             <span className="text-gray-500 mr-4">Language</span>
-            <span className="font-medium">United States | English</span>
+            <span className="font-medium">Egypt | Arabic</span>
           </div>
           <div className="">
             <span className="text-gray-500 mr-4">Currency</span>
-            <span className="font-medium">$ USD</span>
+            <span className="font-medium">EGP</span>
           </div>
         </div>
       </div>

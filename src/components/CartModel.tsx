@@ -19,6 +19,7 @@ const CartModal = () => {
         await wixClient.currentCart.createCheckoutFromCurrentCart({
           channelType: currentCart.ChannelType.WEB,
         });
+        console.log('checkout', checkout);
 
       const { redirectSession } =
         await wixClient.redirects.createRedirectSession({
@@ -77,7 +78,7 @@ const CartModal = () => {
                             {item.quantity} x{" "}
                           </div>
                         )}
-                        ${item.price?.amount}
+                        {item.price?.amount} EGP
                       </div>
                     </div>
                     {/* DESC */}
@@ -104,9 +105,7 @@ const CartModal = () => {
           <div className="">
             <div className="flex items-center justify-between font-semibold">
               <span className="">Subtotal</span>
-              <span className="">${cart.subtotal.amount}</span>
-              console.log(cart);
-              
+              <span className="">{cart.subtotal.amount} EGP</span>              
             </div>
             <p className="text-gray-500 text-sm mt-2 mb-4">
               Shipping and taxes calculated at checkout.

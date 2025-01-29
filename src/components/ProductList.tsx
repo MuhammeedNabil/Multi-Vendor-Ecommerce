@@ -6,7 +6,6 @@ import DOMPurify from "isomorphic-dompurify";
 import Pagination from "./Pagination";
 
 const PRODUCT_PER_PAGE = 8;
-
 const ProductList = async ({
   categoryId,
   limit,
@@ -17,22 +16,21 @@ const ProductList = async ({
   searchParams?: any;
 }) => {
   const wixClient = await wixClientServer();
-console.log('categoryIdcategoryId',categoryId);
 
   const productQuery = wixClient.products
     .queryProducts()
-    .startsWith("name", searchParams?.name || "")
+    .startsWith("name", await (searchParams?.name || ""))
     .eq("collectionIds", categoryId || "00000000-000000-000000-000000000001")
     .hasSome(
       "productType",
-      searchParams?.type ? [searchParams.type] : ["physical", "digital"]
+      await (searchParams?.type ? [searchParams.type] : ["physical", "digital"])
     )
-    .gt("priceData.price", searchParams?.min || 0)
-    .lt("priceData.price", searchParams?.max || 999999)
+    .gt("priceData.price", await (searchParams?.min || 0))
+    .lt("priceData.price", await (searchParams?.max || 999999))
     .limit(limit || PRODUCT_PER_PAGE)
     .skip(
-      searchParams?.page
-        ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
+      (await searchParams?.page)
+        ? parseInt(await searchParams.page) * (limit || PRODUCT_PER_PAGE)
         : 0
     );
   // .find();
@@ -51,7 +49,7 @@ console.log('categoryIdcategoryId',categoryId);
   const res = await productQuery.find();
 
   return (
-    <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
+    <div className="mt-12 flex gap-x-8 gap-y-16 flex-wrap">
       {res.items.map((product: products.Product) => (
         <Link
           href={"/" + product.slug}
@@ -78,7 +76,9 @@ console.log('categoryIdcategoryId',categoryId);
           </div>
           <div className="flex justify-between">
             <span className="font-medium">{product.name}</span>
-            <span className="font-semibold">${product.price?.price}</span>
+            <span className="font-semibold">
+              ${product.price?.discountedPrice}
+            </span>
           </div>
           {product.additionalInfoSections && (
             <div
@@ -93,7 +93,7 @@ console.log('categoryIdcategoryId',categoryId);
             ></div>
           )}
           <button className="rounded-2xl ring-1 ring-Pink text-Pink w-max py-2 px-4 text-xs hover:bg-Pink hover:text-white">
-            Add to Cart
+            Show details
           </button>
         </Link>
       ))}

@@ -20,7 +20,7 @@ const Pagination = ({
     params.set("page", pageNumber.toString());
     replace(`${pathname}?${params.toString()}`);
   };
-
+  
   return (
     <div className="mt-12 flex justify-between w-full">
       <button
@@ -30,6 +30,7 @@ const Pagination = ({
       >
         Previous
       </button>
+      {currentPage+1}
       <button
         className="rounded-md bg-Pink text-white p-2 text-sm w-24 cursor-pointer disabled:cursor-not-allowed disabled:bg-pink-200"
         disabled={!hasNext}

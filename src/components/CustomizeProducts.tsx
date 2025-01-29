@@ -13,6 +13,8 @@ const CustomizeProducts = ({
   variants: products.Variant[];
   productOptions: products.ProductOption[];
 }) => {
+  console.log("productOptions", productOptions);
+
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string;
   }>({});
@@ -28,6 +30,7 @@ const CustomizeProducts = ({
     });
     setSelectedVariant(variant);
   }, [selectedOptions, variants]);
+  console.log("selectedOptions", selectedOptions);
 
   const handleOptionSelect = (optionType: string, choice: string) => {
     setSelectedOptions((prev) => ({ ...prev, [optionType]: choice }));
@@ -63,6 +66,8 @@ const CustomizeProducts = ({
 
               const selected =
                 selectedOptions[option.name!] === choice.description;
+              console.log("selected", selectedOptions[option.name!]);
+              console.log("choice.description", choice.description);
 
               const clickHandler = disabled
                 ? undefined
@@ -97,7 +102,6 @@ const CustomizeProducts = ({
                       : "white",
                     color: selected || disabled ? "white" : "#f35c7a",
                     boxShadow: disabled ? "none" : "",
-                    
                   }}
                   key={choice.description}
                   onClick={clickHandler}
@@ -115,6 +119,7 @@ const CustomizeProducts = ({
           selectedVariant?._id || "00000000-0000-0000-0000-000000000000"
         }
         stockNumber={selectedVariant?.stock?.quantity || 0}
+        selected={selectedOptions}
       />
       {/* COLOR */}
       {/* 

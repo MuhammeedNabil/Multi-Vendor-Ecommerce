@@ -8,10 +8,10 @@ import { Suspense } from "react";
 
 const SinglePage = async ({ params }: { params: { slug: string } }) => {
   const wixClient = await wixClientServer();
-
+  const { slug } = await params; // await has no effect but added to remove the warnings 
   const products = await wixClient.products
     .queryProducts()
-    .eq("slug", params.slug)
+    .eq("slug", slug)
     .find();
 
   if (!products.items[0]) {
@@ -32,14 +32,14 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
         <p className="text-gray-500">{product.description}</p>
         <div className="h-[2px] bg-gray-100" />
         {product.price?.price === product.price?.discountedPrice ? (
-          <h2 className="font-medium text-2xl">${product.price?.price}</h2>
+          <h2 className="font-medium text-2xl">{product.price?.price} EGP</h2>
         ) : (
           <div className="flex items-center gap-4">
             <h3 className="text-xl text-gray-500 line-through">
-              ${product.price?.price}
+              {product.price?.price} EGP
             </h3>
             <h2 className="font-medium text-2xl">
-              ${product.price?.discountedPrice}
+              {product.price?.discountedPrice} EGP
             </h2>
           </div>
         )}
@@ -68,7 +68,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
         {/* REVIEWS */}
         <h1 className="text-2xl">User Reviews</h1>
         <Suspense fallback="Loading...">
-          <Reviews productId={product._id!} />
+          {/* <Reviews productId={product._id!} /> */}
         </Suspense>
       </div>
     </div>
