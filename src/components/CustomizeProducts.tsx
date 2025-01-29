@@ -120,6 +120,7 @@ const CustomizeProducts = ({
         }
         stockNumber={selectedVariant?.stock?.quantity || 0}
         selected={selectedOptions}
+        productOptions={productOptions}
       />
       {/* COLOR */}
       {/* 
