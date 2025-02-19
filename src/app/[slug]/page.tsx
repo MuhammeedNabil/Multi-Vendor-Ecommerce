@@ -4,7 +4,7 @@ import ProductImages from "@/components/ProductImages";
 import Reviews from "@/components/Reviews";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import { FC, Suspense } from "react";
 
 type Props = {
   params: {
@@ -12,8 +12,10 @@ type Props = {
   };
   searchParams: { [key: string]: string | string[] | undefined };
 };
-
-const SinglePage = async ({ params }: { params: Props }) => {
+interface PageProps {
+  params: Props;
+}
+const SinglePage: FC<PageProps> = async ({ params }: { params: Props }) => {
   const wixClient = await wixClientServer();
   const { slug } = await params.params; // await has no effect but added to remove the warnings
   const products = await wixClient.products
