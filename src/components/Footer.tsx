@@ -9,19 +9,17 @@ const Footer = () => {
         {/* LEFT */}
         <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
           <Link href="/">
-            <div className="text-2xl tracking-wide">Bahja Wear</div>
+            <div className="text-2xl tracking-wide">Pink</div>
           </Link>
-          <p>
-            Egypt, Cairo | Online Store
-          </p>
-          <span className="font-semibold">hello@Bahja.dev</span>
+          <p>Egypt, Cairo | Online Store</p>
+          <span className="font-semibold">hello@Pink.dev</span>
           <span className="font-semibold">+20 127 000 6196</span>
           <div className="flex gap-3">
             <Image src="/facebook.png" alt="" width={16} height={16} />
             <Image src="/instagram.png" alt="" width={16} height={16} />
-            {/* <Image src="/youtube.png" alt="" width={16} height={16} />
+            <Image src="/youtube.png" alt="" width={16} height={16} />
             <Image src="/pinterest.png" alt="" width={16} height={16} />
-            <Image src="/x.png" alt="" width={16} height={16} /> */}
+            <Image src="/x.png" alt="" width={16} height={16} />
           </div>
         </div>
         {/* CENTER */}
@@ -74,19 +72,17 @@ const Footer = () => {
           </div>
           <span className="font-semibold">Secure Payments</span>
           <div className="flex gap-3">
-          <Image src="/InstaPay.png" alt="" width={40} height={20}/>
-          <Image src="/CashOnDelivery.png" alt="" width={40} height={20} />
-            {/* <Image src="/discover.png" alt="" width={40} height={20} />
+            <Image src="/discover.png" alt="" width={40} height={20} />
             <Image src="/skrill.png" alt="" width={40} height={20} />
             <Image src="/paypal.png" alt="" width={40} height={20} />
             <Image src="/mastercard.png" alt="" width={40} height={20} />
-            <Image src="/visa.png" alt="" width={40} height={20} /> */} 
+            <Image src="/visa.png" alt="" width={40} height={20} />
           </div>
         </div>
       </div>
       {/* BOTTOM */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-8 mt-16">
-        <div className="">© 2024 Bahja Wear</div>
+        <div className="">© 2025 Pink</div>
         <div className="flex flex-col gap-8 md:flex-row">
           <div className="">
             <span className="text-gray-500 mr-4">Language</span>
