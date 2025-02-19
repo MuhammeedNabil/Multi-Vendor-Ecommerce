@@ -6,18 +6,16 @@ import { wixClientServer } from "@/lib/wixClientServer";
 import { notFound } from "next/navigation";
 import { FC, Suspense } from "react";
 
-type Props = {
+type PageProps = {
   params: {
     slug: string;
   };
   searchParams: { [key: string]: string | string[] | undefined };
 };
-interface PageProps {
-  params: Props;
-}
-const SinglePage: FC<PageProps> = async ({ params }: { params: Props }) => {
+
+const SinglePage: FC<PageProps> = async ({ params }) => {
   const wixClient = await wixClientServer();
-  const { slug } = await params.params; // await has no effect but added to remove the warnings
+  const { slug } = params; // await has no effect but added to remove the warnings
   const products = await wixClient.products
     .queryProducts()
     .eq("slug", slug)
